@@ -1,6 +1,6 @@
 # Rent-A-Car (Spring Boot Learning Project)
-#### Video Demo: <TODO: ADD LINK HERE>
-#### Description
+#### Video Demo: <COMING SOON!>
+#### ---- Description ----
 This is a demo web application for a simple car rental service. The primary goal of this project was to learn the fundamentals of Spring Boot by building a practical, full-stack application.
 
 **Features:**
@@ -30,7 +30,7 @@ The backend exposes a simple REST API:
 - PUT /api/reservations/{id} - Update reservation details.
 - DELETE /api/reservations/{id} – Cancel a reservation.
 
-#### Notes on My Learning
+#### ---- Notes on My Learning ----
 **Backend:**
 
 This project was my first full Spring Boot web application. In my initial attempt I created models, repositories and controllers, and then tried to add user authentication. I didn't understand Spring Security at all at the time, and had difficulty trying to retrofit it into my project considering all the different available methods and my lack of undestanding. I was following instructions I didn't really understand, and my project directory quickly became a mess of files and code I didn't fully understand.
@@ -53,7 +53,7 @@ It's pretty barebones, but it allows the backend to show off its features, so it
 
 After using Django for all my previous web applications, I initially found Spring Boot to be a bit of a pain. But that was my ignorance speaking. I still have a lot to learn, but I've come to really like the structure of Spring Boot projects. Also, I just think Java code looks beautiful (excluding the mass of imports at the top of many files).
 
-#### Future Updates
+#### ---- Future Updates ----
 I'm not completely done with this project yet. There are a few things I want to add before I'll be fully satisfied:
 - Replace the HttpBasic login with my own login.
 - Add the ability to update user details to the frontend.
