@@ -32,6 +32,7 @@ The backend exposes a simple REST API:
 
 #### Notes on My Learning
 **Backend:**
+
 This project was my first full Spring Boot web application. In my initial attempt I created models, repositories and controllers, and then tried to add user authentication. I didn't understand Spring Security at all at the time, and had difficulty trying to retrofit it into my project considering all the different available methods and my lack of undestanding. I was following instructions I didn't really understand, and my project directory quickly became a mess of files and code I didn't fully understand.
 
 So I took a break from this project to study Spring Security, and made small demo projects which authenticated users using different methods and provided different levels of access to different users. I found JWT tokens interesting, but ultimately decided to authenticate users using a JPA UserDetails Service in this app.
@@ -43,11 +44,13 @@ I utilised Services to handle the business logic of requests, seaparating that o
 In the end, I'm much happier with this version. Even if I haven't made the best decision in every case, every decision was mine, and I made them for reasons I can explain.
 
 **Frontend:**
+
 The main purpose of this project was to study Spring Boot, so my frontend was pretty basic and utilitarian. I had AI create a basic HTML and CSS template with junk data, and I just modified it to suit my needs. Then, I manually created a simple Single-Page Application (SPA) in plain JavaScript to fetch data from the API, generate HTML, and adjust styling.
 
 It's pretty barebones, but it allows the backend to show off its features, so it'll do for now. I intend to add to it, and it's written in a such a way that I expect the updates will largely be new additions to the code, with only minor rewrites.
 
 **Closing Thoughts:**
+
 After using Django for all my previous web applications, I initially found Spring Boot to be a bit of a pain. But that was my ignorance speaking. I still have a lot to learn, but I've come to really like the structure of Spring Boot projects. Also, I just think Java code looks beautiful (excluding the mass of imports at the top of many files).
 
 #### Future Updates
