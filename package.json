@@ -1,0 +1,14 @@
+{
+  "name": "rent-a-car",
+  "version": "1.0.0",
+  "description": "Spring Boot practice",
+  "main": "app.js",
+  "scripts": {
+    "sass": "sass --watch src/main/resources/static/scss/:src/main/resources/static/css --no-source-map"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.92.0"
+  }
+}
