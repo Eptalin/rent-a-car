@@ -70,12 +70,13 @@ async function results_view(event) {
 
     // Set date label above search results
     const dateLabel = document.querySelector("#selected-date")
-    dateLabel.innerHTML = `${dd} / ${mm} / ${yyyy}`;
-    dateLabel.dataset.date = today;
+    const searchDate = document.querySelector('#date').value;
+    dateLabel.dataset.date = searchDate;
+    const dateComponents = searchDate.split("-");
+    dateLabel.innerHTML = `${dateComponents[2]} / ${dateComponents[1]} / ${dateComponents[0]}`;
     
     // Query API for available cars
-    
-    const response = await fetch(`/api/cars?date=${today}`, {
+    const response = await fetch(`/api/cars?date=${searchDate}`, {
             method: 'GET',
         });
 
