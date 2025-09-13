@@ -26,64 +26,60 @@ import dev.eptalin.rent_a_car.repository.UserRepository;
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
-    
     // ---- DB Repository Injection ----
-    
+
     private final ReservationRepository reservations;
     private final ReservationService reservationService;
     private final UserRepository users;
 
-    public ReservationController(ReservationRepository reservations, CarRepository carRepository, ReservationService reservationService, UserRepository users) {
+    public ReservationController(ReservationRepository reservations, CarRepository carRepository,
+            ReservationService reservationService, UserRepository users) {
         this.reservations = reservations;
         this.reservationService = reservationService;
         this.users = users;
     }
 
-
     // ---- API Routes ----
 
     // GET ("/api/reservations") -> Return a list of all reservations
-    // GET ("/api/reservations?userId={id}") -> Return a list of one user's reservations
+    // GET ("/api/reservations?userId={id}") -> Return a list of one user's
+    // reservations
     @GetMapping
     public List<Reservation> getReservations(@RequestParam(required = false) Long userId) {
         // No userId -> All reservations
         if (userId == null) {
             return reservations.findAll();
-        } 
+        }
         // userId -> User's reservations
         else {
             User user = users.findById(userId)
                     .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "User not found."));
+                            HttpStatus.NOT_FOUND, "User not found."));
             return reservations.findByUserOrderByDateDesc(user);
         }
     }
-
 
     // GET ("/api/reservations/{id}") -> Return a single reservation
     @GetMapping("/{id}")
     public Reservation getReservationById(@PathVariable Long id) {
         return reservations.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "Reservation not found"
-                ));
+                        HttpStatus.NOT_FOUND,
+                        "Reservation not found"));
     }
-
 
     // POST ("/api/reservations") -> Create a new reservation
     @PostMapping
     public Reservation addReservation(@RequestBody ReservationDetails reservation) {
-        
+
         // Validate input
-        if (reservation.getUserId() == null || 
-            reservation.getCarId() == null || 
-            reservation.getDate() == null) {
-                throw new ResponseStatusException(
+        if (reservation.getUserId() == null ||
+                reservation.getCarId() == null ||
+                reservation.getDate() == null) {
+            throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "Missing required input."
-                );
-            }
+                    "Missing required input.");
+        }
 
         // Save the new reservation
         Long userId = reservation.getUserId();
@@ -92,20 +88,18 @@ public class ReservationController {
         return reservationService.reserveCar(userId, carId, date);
     }
 
-
     // PUT ("/api/reservations/{id}") -> Alter an existing reservation
     @PutMapping("/{id}")
     public Reservation updateReservation(@PathVariable Long id, @RequestBody ReservationDetails reservation) {
 
         // Validate input
-        if (reservation.getUserId() == null || 
-            reservation.getCarId() == null || 
-            reservation.getDate() == null) {
-                throw new ResponseStatusException(
+        if (reservation.getUserId() == null ||
+                reservation.getCarId() == null ||
+                reservation.getDate() == null) {
+            throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "Missing required input."
-                );
-            }
+                    "Missing required input.");
+        }
 
         // Save the new reservation
         Long reservationId = id;
@@ -114,7 +108,6 @@ public class ReservationController {
         LocalDate date = reservation.getDate();
         return reservationService.update(reservationId, userId, carId, date);
     }
-
 
     // DELETE ("/api/reservations/{id}") -> Delete an existing reservation
     @DeleteMapping("/{id}")

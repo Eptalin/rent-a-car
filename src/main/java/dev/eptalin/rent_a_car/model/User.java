@@ -13,27 +13,27 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    @JsonIgnore  // Don't serialize the password
+    @JsonIgnore // Don't serialize the password
     private String password;
-    @JsonIgnore  // Don't serialize the roles
+    @JsonIgnore // Don't serialize the roles
     private String roles;
 
-    
     // Connects Users to the foreign key column in Reservations
-    @JsonIgnore   // Don't serialise this attribute
+    @JsonIgnore // Don't serialise this attribute
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations = new ArrayList<>();
 
     // ---- Constructors ----
 
-    public User() { }
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;
@@ -43,17 +43,37 @@ public class User {
 
     // ---- Getters & Setters ----
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getUsername() {
+        return username;
+    }
 
-    public String getRoles() { return roles; }
-    public void setRoles(String roles) { this.roles = roles; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 
     // ---- toString Method ----
 

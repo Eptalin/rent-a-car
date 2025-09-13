@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class SecurityUser implements UserDetails {
-    
+
     private User user;
 
     public SecurityUser(User user) {
@@ -21,7 +21,7 @@ public class SecurityUser implements UserDetails {
     public String getUsername() {
         return user.getUsername();
     }
-    
+
     @Override
     public String getPassword() {
         return user.getPassword();
@@ -40,22 +40,22 @@ public class SecurityUser implements UserDetails {
     // Hard code this stuff to true. Not dealing with account locking or expiration
     @Override
     public boolean isAccountNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-       return true;
+        return true;
     }
 
 }

@@ -20,8 +20,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     // Find a reservation for a car on a date
     Optional<Reservation> findByDateAndCar(LocalDate date, Car car);
-    
+
     // Find a reservation for a car on a date, excluding a reservation we're editing
     Optional<Reservation> findByDateAndCarAndIdNot(LocalDate date, Car car, Long id);
-    
+
 }

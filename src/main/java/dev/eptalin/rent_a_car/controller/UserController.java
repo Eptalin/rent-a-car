@@ -17,7 +17,6 @@ import dev.eptalin.rent_a_car.model.User;
 import dev.eptalin.rent_a_car.repository.UserRepository;
 import dev.eptalin.rent_a_car.service.UserService;
 
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -32,7 +31,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     // ---- API Routes ----
 
     // GET ("/api/users/me") -> Return the current user
@@ -41,9 +39,8 @@ public class UserController {
         String username = authentication.getName();
         return users.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "User not found"
-                ));
+                        HttpStatus.NOT_FOUND,
+                        "User not found"));
     }
 
     // POST ("/api/users") -> Add a new user to the repository (DB)
@@ -51,13 +48,12 @@ public class UserController {
     public User createUser(@RequestBody UserDetails user) throws Exception {
 
         // Validate input
-        if (user.getUsername() == null || 
-            user.getPassword() == null ) {
-                throw new ResponseStatusException(
+        if (user.getUsername() == null ||
+                user.getPassword() == null) {
+            throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "Missing required input."
-                );
-            }
+                    "Missing required input.");
+        }
 
         // Save the new user
         String username = user.getUsername();
@@ -68,7 +64,7 @@ public class UserController {
     // PATCH ("/api/users/{id}") -> Update username or password field
     @PatchMapping("/{id}")
     public User patchUser(@PathVariable Long id, @RequestBody UpdatedUserDetails request) {
-        
+
         // Pass input to the User Service
         return userService.updateUser(id, request);
 

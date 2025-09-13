@@ -23,44 +23,43 @@ public class RentACarApplication {
 		SpringApplication.run(RentACarApplication.class, args);
 	}
 
-	
 	// ---- Run Commands on Server Startup ----
-	
+
 	// @Bean
 	// CommandLineRunner commandLineRunner(
-	// 	UserRepository users, 
-	// 	PasswordEncoder encoder, 
-	// 	CarRepository cars,
-	// 	ReservationRepository reservations) {
-	// 	return args -> {
-	// 		// Create a sample user
-	// 		// users.save(new User("user", encoder.encode("password")));
+	// UserRepository users,
+	// PasswordEncoder encoder,
+	// CarRepository cars,
+	// ReservationRepository reservations) {
+	// return args -> {
+	// // Create a sample user
+	// // users.save(new User("user", encoder.encode("password")));
 
-	// 		// Create sample reservations
-	// 		List<User> allUsers = users.findAll();
-	// 		List<Car> allCars = cars.findAll();
+	// // Create sample reservations
+	// List<User> allUsers = users.findAll();
+	// List<Car> allCars = cars.findAll();
 
-	//		// Choose start and end dates for random entries
-	// 		LocalDate start = LocalDate.of(2025, 9, 15);
-	// 		LocalDate end   = LocalDate.of(2025, 9, 21);
+	// // Choose start and end dates for random entries
+	// LocalDate start = LocalDate.of(2025, 9, 15);
+	// LocalDate end = LocalDate.of(2025, 9, 21);
 
-	// 		// Loop through each date in the range
-	// 		for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
-	// 			List<Car> shuffledCars = new ArrayList<>(allCars);
-	// 			//randomize cars each day
-	// 			Collections.shuffle(shuffledCars); 
-	// 			// pick a number of cars to reserve for the day (10 - 20)
-	// 			Random rand = new Random();
-	// 			int carsToReserve = 10 + rand.nextInt(11);
-	// 			for (int i = 0; i < carsToReserve; i++) {
-	// 				Car car = shuffledCars.get(i);
-	// 				User user = allUsers.get(new Random().nextInt(allUsers.size()));
+	// // Loop through each date in the range
+	// for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+	// List<Car> shuffledCars = new ArrayList<>(allCars);
+	// //randomize cars each day
+	// Collections.shuffle(shuffledCars);
+	// // pick a number of cars to reserve for the day (10 - 20)
+	// Random rand = new Random();
+	// int carsToReserve = 10 + rand.nextInt(11);
+	// for (int i = 0; i < carsToReserve; i++) {
+	// Car car = shuffledCars.get(i);
+	// User user = allUsers.get(new Random().nextInt(allUsers.size()));
 
-	// 				Reservation reservation = new Reservation(user, car, date);
-	// 				reservations.save(reservation);
-	// 			}
-	// 		}
-	// 	};
+	// Reservation reservation = new Reservation(user, car, date);
+	// reservations.save(reservation);
+	// }
+	// }
+	// };
 	// }
 
 }

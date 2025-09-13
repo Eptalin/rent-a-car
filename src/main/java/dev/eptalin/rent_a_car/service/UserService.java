@@ -11,18 +11,17 @@ import dev.eptalin.rent_a_car.repository.UserRepository;
 
 @Service
 public class UserService {
-    
+
     // ---- Inject User Repository and Password Encoder
-    
+
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
     public UserService(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
-        
-    }
 
+    }
 
     // ---- Register a New User ----
 
@@ -42,13 +41,12 @@ public class UserService {
 
     }
 
-
     // ---- Update an Existing User ----
-    
+
     public User updateUser(Long id, UpdatedUserDetails request) {
-        
+
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         // Update the username
         if (request.getUsername() != null) {
@@ -62,7 +60,7 @@ public class UserService {
             if (!encoder.matches(request.getOldPassword(), user.getPassword())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password is incorrect.");
             }
-            
+
             // Encode and save the new password
             user.setPassword(encoder.encode(request.getNewPassword()));
         }
@@ -72,5 +70,4 @@ public class UserService {
 
     }
 
-    
 }

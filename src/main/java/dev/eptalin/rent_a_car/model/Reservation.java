@@ -5,13 +5,11 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "reservations",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"car_id", "date"})
-    })
+@Table(name = "reservations", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "car_id", "date" })
+})
 public class Reservation {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,10 +26,10 @@ public class Reservation {
 
     private LocalDate date;
 
-
     // ---- Constructors ----
 
-    public Reservation() { }
+    public Reservation() {
+    }
 
     public Reservation(User user, Car car, LocalDate date) {
         this.user = user;
@@ -39,21 +37,39 @@ public class Reservation {
         this.date = date;
     }
 
-
     // ---- Getters & Setters ----
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Car getCar() { return car; }
-    public void setCar(Car car) { this.car = car; }
+    public User getUser() {
+        return user;
+    }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
     // ---- String Method ----
 

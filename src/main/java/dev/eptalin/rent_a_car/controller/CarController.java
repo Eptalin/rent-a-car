@@ -16,7 +16,7 @@ import dev.eptalin.rent_a_car.repository.CarRepository;
 @RestController
 @RequestMapping("/api/cars")
 public class CarController {
-    
+
     // ---- DB Repository Injection ----
 
     private final CarRepository cars;
@@ -24,8 +24,7 @@ public class CarController {
     public CarController(CarRepository cars) {
         this.cars = cars;
     }
-    
-    
+
     // ---- API ROUTES ----
 
     // GET ("/api/cars") -> Return a list of all cars
@@ -35,11 +34,11 @@ public class CarController {
         // No date -> All cars
         if (date == null) {
             return cars.findAll();
-        } 
+        }
         // Past date -> No cars & Error
         else if (LocalDate.now().isAfter(date)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot select past dates.");
-        } 
+        }
         // Valid present or future date => Available cars
         else {
             return cars.findAvailableCars(date);

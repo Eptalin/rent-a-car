@@ -16,7 +16,7 @@ import dev.eptalin.rent_a_car.service.JpaUserDetailsService;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    
+
     // ---- JPA User Details Service Injection ----
 
     private final JpaUserDetailsService jpaUserDetailsService;
@@ -25,24 +25,22 @@ public class SecurityConfig {
         this.jpaUserDetailsService = jpaUserDetailsService;
     }
 
-
     // ---- Security Filter Chain ----
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-            .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/h2-console/**")
-                .disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**", "/api/**").permitAll()
-                .anyRequest().authenticated())
-            .userDetailsService(jpaUserDetailsService)
-            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
-            .httpBasic(Customizer.withDefaults())
-            .build();
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                        .disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/h2-console/**", "/api/**").permitAll()
+                        .anyRequest().authenticated())
+                .userDetailsService(jpaUserDetailsService)
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
-
 
     // ---- BCrypt Password Encoder ----
 

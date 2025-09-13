@@ -20,12 +20,12 @@ public class ReservationService {
     private final UserRepository userRepository;
     private final CarRepository carRepository;
 
-    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository) {
+    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository,
+            CarRepository carRepository) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.carRepository = carRepository;
     }
-
 
     // ---- Register a New Reservation ----
 
@@ -34,26 +34,25 @@ public class ReservationService {
         // Verify user is valid
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, 
-                    "User not found."
-                ));
-        
+                        HttpStatus.NOT_FOUND,
+                        "User not found."));
+
         // Verify car is valid
         Car car = carRepository.findById(carId)
                 .orElseThrow(() -> new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, 
-                    "Car not found."
-                ));
+                        HttpStatus.NOT_FOUND,
+                        "Car not found."));
 
         // Verify date is not in the past
         if (LocalDate.now().isAfter(date)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot make reservations for past dates");
         }
-        
+
         // Verify car is available on the selected date
         reservationRepository.findByDateAndCar(date, car)
-                .ifPresent(r -> {throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Car already reserved on that date.");
+                .ifPresent(r -> {
+                    throw new ResponseStatusException(
+                            HttpStatus.BAD_REQUEST, "Car already reserved on that date.");
                 });
 
         // If we reach here, save the reservation
@@ -65,17 +64,16 @@ public class ReservationService {
 
     }
 
-    
     // ---- Update an Existing Reservation ----
 
     public Reservation update(Long reservationId, Long userId, Long carId, LocalDate date) {
 
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found."));
-        
+
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found."));
-        
+
         Car car = carRepository.findById(carId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found."));
 
@@ -86,10 +84,11 @@ public class ReservationService {
 
         // Verify car is available on the selected date (excluding this reservation)
         reservationRepository.findByDateAndCarAndIdNot(date, car, reservationId)
-                .ifPresent(r -> {throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Car already reserved on that date.");
+                .ifPresent(r -> {
+                    throw new ResponseStatusException(
+                            HttpStatus.BAD_REQUEST, "Car already reserved on that date.");
                 });
-        
+
         // If we reach this point, save the updates
         reservation.setUser(user);
         reservation.setCar(car);
